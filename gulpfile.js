@@ -15,7 +15,7 @@ const startServerSetting = {
   open: true,
 };
 
-gulp.task("includeFiles", function () {
+gulp.task("html", function () {
   return gulp
     .src("./src/*.html")
     .pipe(fileInclude(fileIncludeSetting))
@@ -29,11 +29,11 @@ gulp.task("sass", function () {
     .pipe(gulp.dest("./dist/css/"));
 });
 
-gulp.task("copyImages", function () {
+gulp.task("images", function () {
   return gulp.src("./src/img/**/*").pipe(gulp.dest("./dist/img/"));
 });
 
-gulp.task("startServer", function () {
+gulp.task("server", function () {
   return gulp.src("./dist/").pipe(server(startServerSetting));
 });
 
