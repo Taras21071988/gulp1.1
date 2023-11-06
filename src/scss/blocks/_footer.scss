@@ -4,4 +4,7 @@
   font-size: 38px;
   text-align: center;
   color: #fff;
+  @media (max-width: 1200px){
+    font-size: 26px;
+  };
 }
