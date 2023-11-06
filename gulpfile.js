@@ -31,6 +31,7 @@ const plumberSassConfig = {
 gulp.task("html", function () {
   return gulp
     .src("./src/*.html")
+    .pipe(plumber(plumberSassConfig))
     .pipe(fileInclude(fileIncludeSetting))
     .pipe(gulp.dest("./dist/"));
 });
