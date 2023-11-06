@@ -8,6 +8,7 @@ const sourceMaps = require("gulp-sourcemaps");
 // const groupMedia = require('gulp-group-css-media-queries')
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
+const webpack = require("webpack-stream");
 
 const fileIncludeSetting = {
   prefix: "@@",
@@ -72,19 +73,28 @@ gulp.task("clean", function (done) {
   done();
 });
 
+gulp.task("js", function () {
+  return gulp
+    .src("./src/js/*.js")
+    .pipe(plumber(plumberNotify("JS")))
+    .pipe(webpack(require("./webpack.config.js")))
+    .pipe(gulp.dest("./dist/js/"));
+});
+
 gulp.task("watch", function () {
   gulp.watch("./src/scss/**/*.scss", gulp.parallel("sass"));
   gulp.watch("./src/**/*.html", gulp.parallel("html"));
   gulp.watch("./src/img/**/*", gulp.parallel("images"));
-  gulp.watch("./src/img/**/*", gulp.parallel("fonts"));
-  gulp.watch("./src/img/**/*", gulp.parallel("files"));
+  gulp.watch("./src/fonts/**/*", gulp.parallel("fonts"));
+  gulp.watch("./src/files/**/*", gulp.parallel("files"));
+  gulp.watch("./src/js/**/*.js", gulp.parallel("js"));
 });
 
 gulp.task(
   "default",
   gulp.series(
     "clean",
-    gulp.parallel("html", "sass", "images", "fonts", "files"),
+    gulp.parallel("html", "sass", "images", "fonts", "files", "js"),
     gulp.parallel("server", "watch")
   )
 );
