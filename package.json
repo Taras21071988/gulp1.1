@@ -12,9 +12,17 @@
     "gulp-sourcemaps": "^3.0.0",
     "sass": "^1.69.5",
     "style-loader": "^3.3.3",
-    "webpack-stream": "^7.0.0"
+    "webpack-stream": "^7.0.0",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "gulp-babel": "^8.0.0"
   },
   "dependencies": {
     "gulp-cli": "^2.3.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
