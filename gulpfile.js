@@ -39,7 +39,13 @@ gulp.task("server", function () {
 
 gulp.task("clean", function (done) {
   if (fs.existsSync("./dist/")) {
-    return gulp.src("./dist/",{read:false}).pipe(clean());
+    return gulp.src("./dist/", { read: false }).pipe(clean());
   }
-  done()
+  done();
+});
+
+gulp.task("watch", function () {
+  gulp.watch("./src/scss/**/*.scss", gulp.parallel("sass"));
+  gulp.watch("./src/**/*.html", gulp.parallel("html"));
+  gulp.watch("./src/img/**/*", gulp.parallel("images"));
 });
