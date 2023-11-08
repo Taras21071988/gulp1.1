@@ -1,1 +1,1 @@
-console.log("Hello performance testing webpack");
+(()=>{"use strict";console.log("Hello performance testing webpack","Hello World")})();
