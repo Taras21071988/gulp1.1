@@ -10,6 +10,7 @@ const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
 const babel = require("gulp-babel");
+const imagemin = require("gulp-imagemin");
 
 const fileIncludeSetting = {
   prefix: "@@",
@@ -54,11 +55,16 @@ gulp.task("sass", function () {
 });
 
 gulp.task("images", function () {
-  return gulp.src("./src/img/**/*").pipe(gulp.dest("./dist/img/"));
+  return gulp
+    .src("./src/img/**/*")
+    .pipe(imagemin({ verbose: true }))
+    .pipe(gulp.dest("./dist/img/"));
 });
+
 gulp.task("fonts", function () {
   return gulp.src("./src/fonts/**/*").pipe(gulp.dest("./dist/fonts/"));
 });
+
 gulp.task("files", function () {
   return gulp.src("./src/files/**/*").pipe(gulp.dest("./dist/files/"));
 });
