@@ -11,6 +11,7 @@ const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
 const babel = require("gulp-babel");
 const imagemin = require("gulp-imagemin");
+const changed = require("gulp-changed");
 
 const fileIncludeSetting = {
   prefix: "@@",
@@ -57,6 +58,7 @@ gulp.task("sass", function () {
 gulp.task("images", function () {
   return gulp
     .src("./src/img/**/*")
+    .pipe(changed("./dist/img/"))
     .pipe(imagemin({ verbose: true }))
     .pipe(gulp.dest("./dist/img/"));
 });
