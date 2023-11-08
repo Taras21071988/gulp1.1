@@ -36,7 +36,7 @@ const plumberNotify = (title) => {
 
 gulp.task("html", function () {
   return gulp
-    .src("./src/*.html")
+    .src(["./src/html/**/*.html", "!./src/html/blocks/*.html"])
     .pipe(changed("./dist/"))
     .pipe(plumber(plumberNotify("html")))
     .pipe(fileInclude(fileIncludeSetting))
@@ -73,7 +73,10 @@ gulp.task("fonts", function () {
 });
 
 gulp.task("files", function () {
-  return gulp.src("./src/files/**/*")  .pipe(changed("./dist/files/")).pipe(gulp.dest("./dist/files/"));
+  return gulp
+    .src("./src/files/**/*")
+    .pipe(changed("./dist/files/"))
+    .pipe(gulp.dest("./dist/files/"));
 });
 
 gulp.task("server", function () {
@@ -99,7 +102,7 @@ gulp.task("js", function () {
 
 gulp.task("watch", function () {
   gulp.watch("./src/scss/**/*.scss", gulp.parallel("sass"));
-  gulp.watch("./src/**/*.html", gulp.parallel("html"));
+  gulp.watch("./src/html/**/*.html", gulp.parallel("html"));
   gulp.watch("./src/img/**/*", gulp.parallel("images"));
   gulp.watch("./src/fonts/**/*", gulp.parallel("fonts"));
   gulp.watch("./src/files/**/*", gulp.parallel("files"));
