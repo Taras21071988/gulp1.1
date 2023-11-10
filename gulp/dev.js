@@ -38,7 +38,7 @@ const plumberNotify = (title) => {
   };
 };
 
-gulp.task("html", function () {
+gulp.task("html:dev", function () {
   return gulp
     .src(["./src/html/**/*.html", "!./src/html/blocks/*.html"])
     .pipe(changed("./build/"))
@@ -47,7 +47,7 @@ gulp.task("html", function () {
     .pipe(gulp.dest("./build/"));
 });
 
-gulp.task("sass", function () {
+gulp.task("sass:dev", function () {
   return (
     gulp
       .src("./src/scss/*.scss")
@@ -62,7 +62,7 @@ gulp.task("sass", function () {
   );
 });
 
-gulp.task("images", function () {
+gulp.task("images:dev", function () {
   return gulp
     .src("./src/img/**/*")
     .pipe(changed("./build/img/"))
@@ -70,32 +70,32 @@ gulp.task("images", function () {
     .pipe(gulp.dest("./build/img/"));
 });
 
-gulp.task("fonts", function () {
+gulp.task("fonts:dev", function () {
   return gulp
     .src("./src/fonts/**/*")
     .pipe(changed("./build/fonts/"))
     .pipe(gulp.dest("./build/fonts/"));
 });
 
-gulp.task("files", function () {
+gulp.task("files:dev", function () {
   return gulp
     .src("./src/files/**/*")
     .pipe(changed("./build/files/"))
     .pipe(gulp.dest("./build/files/"));
 });
 
-gulp.task("server", function () {
+gulp.task("server:dev", function () {
   return gulp.src("./build/").pipe(server(startServerSetting));
 });
 
-gulp.task("clean", function (done) {
+gulp.task("clean:dev", function (done) {
   if (fs.existsSync("./build/")) {
     return gulp.src("./build/", { read: false }).pipe(clean());
   }
   done();
 });
 
-gulp.task("js", function () {
+gulp.task("js:dev", function () {
   return gulp
     .src("./src/js/*.js")
     .pipe(changed("./build/js/"))
@@ -105,7 +105,7 @@ gulp.task("js", function () {
     .pipe(gulp.dest("./build/js/"));
 });
 
-gulp.task("watch", function () {
+gulp.task("watch:dev", function () {
   gulp.watch("./src/scss/**/*.scss", gulp.parallel("sass"));
   gulp.watch("./src/html/**/*.html", gulp.parallel("html"));
   gulp.watch("./src/img/**/*", gulp.parallel("images"));
