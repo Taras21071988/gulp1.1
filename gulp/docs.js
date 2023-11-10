@@ -100,11 +100,3 @@ gulp.task("js:docs", function () {
     .pipe(gulp.dest("./docs/js/"));
 });
 
-gulp.task("watch:docs", function () {
-  gulp.watch("./src/scss/**/*.scss", gulp.parallel("sass:docs"));
-  gulp.watch("./src/html/**/*.html", gulp.parallel("html:docs"));
-  gulp.watch("./src/img/**/*", gulp.parallel("images:docs"));
-  gulp.watch("./src/fonts/**/*", gulp.parallel("fonts:docs"));
-  gulp.watch("./src/files/**/*", gulp.parallel("files:docs"));
-  gulp.watch("./src/js/**/*.js", gulp.parallel("js:docs"));
-});
