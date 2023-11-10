@@ -41,56 +41,56 @@ const plumberNotify = (title) => {
 gulp.task("html", function () {
   return gulp
     .src(["./src/html/**/*.html", "!./src/html/blocks/*.html"])
-    .pipe(changed("./dist/"))
+    .pipe(changed("./build/"))
     .pipe(plumber(plumberNotify("html")))
     .pipe(fileInclude(fileIncludeSetting))
-    .pipe(gulp.dest("./dist/"));
+    .pipe(gulp.dest("./build/"));
 });
 
 gulp.task("sass", function () {
   return (
     gulp
       .src("./src/scss/*.scss")
-      .pipe(changed("./dist/css/"))
+      .pipe(changed("./build/css/"))
       .pipe(plumber(plumberNotify("Styles")))
       .pipe(sourceMaps.init())
       .pipe(sassGlob())
       .pipe(sass())
       // .pipe(groupMedia())
       .pipe(sourceMaps.write())
-      .pipe(gulp.dest("./dist/css/"))
+      .pipe(gulp.dest("./build/css/"))
   );
 });
 
 gulp.task("images", function () {
   return gulp
     .src("./src/img/**/*")
-    .pipe(changed("./dist/img/"))
+    .pipe(changed("./build/img/"))
     .pipe(imagemin({ verbose: true }))
-    .pipe(gulp.dest("./dist/img/"));
+    .pipe(gulp.dest("./build/img/"));
 });
 
 gulp.task("fonts", function () {
   return gulp
     .src("./src/fonts/**/*")
-    .pipe(changed("./dist/fonts/"))
-    .pipe(gulp.dest("./dist/fonts/"));
+    .pipe(changed("./build/fonts/"))
+    .pipe(gulp.dest("./build/fonts/"));
 });
 
 gulp.task("files", function () {
   return gulp
     .src("./src/files/**/*")
-    .pipe(changed("./dist/files/"))
-    .pipe(gulp.dest("./dist/files/"));
+    .pipe(changed("./build/files/"))
+    .pipe(gulp.dest("./build/files/"));
 });
 
 gulp.task("server", function () {
-  return gulp.src("./dist/").pipe(server(startServerSetting));
+  return gulp.src("./build/").pipe(server(startServerSetting));
 });
 
 gulp.task("clean", function (done) {
-  if (fs.existsSync("./dist/")) {
-    return gulp.src("./dist/", { read: false }).pipe(clean());
+  if (fs.existsSync("./build/")) {
+    return gulp.src("./build/", { read: false }).pipe(clean());
   }
   done();
 });
@@ -98,11 +98,11 @@ gulp.task("clean", function (done) {
 gulp.task("js", function () {
   return gulp
     .src("./src/js/*.js")
-    .pipe(changed("./dist/js/"))
+    .pipe(changed("./build/js/"))
     .pipe(plumber(plumberNotify("JS")))
     .pipe(babel())
     .pipe(webpack(require("../webpack.config.js")))
-    .pipe(gulp.dest("./dist/js/"));
+    .pipe(gulp.dest("./build/js/"));
 });
 
 gulp.task("watch", function () {
