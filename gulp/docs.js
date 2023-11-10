@@ -1,13 +1,17 @@
 const gulp = require("gulp");
 const fileInclude = require("gulp-file-include");
+
+//SCSS
 const sass = require("gulp-sass")(require("sass"));
 const sassGlob = require("gulp-sass-glob");
 const autoprefixer = require("gulp-autoprefixer");
+const csso = require("gulp-csso");
+const sourceMaps = require("gulp-sourcemaps");
+const groupMedia = require("gulp-group-css-media-queries");
+
 const server = require("gulp-server-livereload");
 const clean = require("gulp-clean");
 const fs = require("fs");
-const sourceMaps = require("gulp-sourcemaps");
-const groupMedia = require("gulp-group-css-media-queries");
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
@@ -55,6 +59,7 @@ gulp.task("sass:docs", function () {
     .pipe(sassGlob())
     .pipe(groupMedia())
     .pipe(sass())
+    .pipe(csso())
     .pipe(sourceMaps.write())
     .pipe(gulp.dest("./docs/css/"));
 });
