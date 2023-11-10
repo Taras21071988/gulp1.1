@@ -2,6 +2,7 @@ const gulp = require("gulp");
 const fileInclude = require("gulp-file-include");
 const sass = require("gulp-sass")(require("sass"));
 const sassGlob = require("gulp-sass-glob");
+const autoprefixer = require("gulp-autoprefixer");
 const server = require("gulp-server-livereload");
 const clean = require("gulp-clean");
 const fs = require("fs");
@@ -50,6 +51,7 @@ gulp.task("sass:docs", function () {
     .pipe(changed("./docs/css/"))
     .pipe(plumber(plumberNotify("Styles")))
     .pipe(sourceMaps.init())
+    .pipe(autoprefixer())
     .pipe(sassGlob())
     .pipe(groupMedia())
     .pipe(sass())
@@ -99,4 +101,3 @@ gulp.task("js:docs", function () {
     .pipe(webpack(require("../webpack.config.js")))
     .pipe(gulp.dest("./docs/js/"));
 });
-
