@@ -11,6 +11,12 @@ const autoprefixer = require("gulp-autoprefixer");
 const csso = require("gulp-csso");
 const sourceMaps = require("gulp-sourcemaps");
 const groupMedia = require("gulp-group-css-media-queries");
+const webpCss = require("gulp-webp-css");
+
+//Images
+const imagemin = require("gulp-imagemin");
+const webp = require("gulp-webp");
+const webpHTML = require("gulp-webp-html");
 
 const server = require("gulp-server-livereload");
 const clean = require("gulp-clean");
@@ -19,7 +25,6 @@ const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
 const babel = require("gulp-babel");
-const imagemin = require("gulp-imagemin");
 const changed = require("gulp-changed");
 
 const fileIncludeSetting = {
@@ -49,6 +54,7 @@ gulp.task("html:docs", function () {
     .pipe(changed("./docs/"))
     .pipe(plumber(plumberNotify("html")))
     .pipe(fileInclude(fileIncludeSetting))
+    .pipe(webpHTML())
     .pipe(htmlclean())
     .pipe(gulp.dest("./docs/"));
 });
@@ -61,6 +67,7 @@ gulp.task("sass:docs", function () {
     .pipe(sourceMaps.init())
     .pipe(autoprefixer())
     .pipe(sassGlob())
+    .pipe(webpCss())
     .pipe(groupMedia())
     .pipe(sass())
     .pipe(csso())
@@ -71,6 +78,10 @@ gulp.task("sass:docs", function () {
 gulp.task("images:docs", function () {
   return gulp
     .src("./src/img/**/*")
+    .pipe(changed("./docs/img/"))
+    .pipe(webp())
+    .pipe(gulp.dest("./docs/img/"))
+    .pipe(gulp.src("./src/img/**/*"))
     .pipe(changed("./docs/img/"))
     .pipe(imagemin({ verbose: true }))
     .pipe(gulp.dest("./docs/img/"));
