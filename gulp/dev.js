@@ -106,12 +106,12 @@ gulp.task("js:dev", function () {
 });
 
 gulp.task("watch:dev", function () {
-  gulp.watch("./src/scss/**/*.scss", gulp.parallel("sass"));
-  gulp.watch("./src/html/**/*.html", gulp.parallel("html"));
-  gulp.watch("./src/img/**/*", gulp.parallel("images"));
-  gulp.watch("./src/fonts/**/*", gulp.parallel("fonts"));
-  gulp.watch("./src/files/**/*", gulp.parallel("files"));
-  gulp.watch("./src/js/**/*.js", gulp.parallel("js"));
+  gulp.watch("./src/scss/**/*.scss", gulp.parallel("sass:dev"));
+  gulp.watch("./src/html/**/*.html", gulp.parallel("html:dev"));
+  gulp.watch("./src/img/**/*", gulp.parallel("images:dev"));
+  gulp.watch("./src/fonts/**/*", gulp.parallel("fonts:dev"));
+  gulp.watch("./src/files/**/*", gulp.parallel("files:dev"));
+  gulp.watch("./src/js/**/*.js", gulp.parallel("js:dev"));
 });
 
 
